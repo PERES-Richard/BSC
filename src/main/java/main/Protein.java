@@ -1,7 +1,12 @@
 package main;
 
-public class Protein {
+public class Protein implements Comparable<Protein>{
     private int value;
+
+    @Override
+    public int compareTo(Protein candidate) {
+        return Integer.compare(this.getValue(), candidate.getValue());
+    }
 
     public Protein(int value) {
         this.value = value;
