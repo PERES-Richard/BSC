@@ -12,10 +12,10 @@ public class Complexe {
     @Override
     public String toString() {
         StringBuilder builder =  new StringBuilder();
-        builder.append("Le graph a " + subComplexes.size() + " sous-complexes :\n");
+        builder.append("Le graph a ").append(subComplexes.size()).append(" sous-complexes :\n");
         for (int i = 0; i < subComplexes.size(); i++) {
-            builder.append("- Sous-complexe " + i);
-            builder.append("\t" + subComplexes.toString());
+            builder.append("- Sous-complexe ").append(i);
+            builder.append("\t").append(subComplexes.toString());
         }
         return builder.toString();
     }
