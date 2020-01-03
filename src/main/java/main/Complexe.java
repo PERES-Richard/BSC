@@ -2,10 +2,10 @@ package main;
 
 import java.util.List;
 
-public class Graph {
+public class Complexe {
     public List<SubComplex> subComplexes;
 
-    public Graph(List<SubComplex> subComplexes) {
+    public Complexe(List<SubComplex> subComplexes) {
         this.subComplexes = subComplexes;
     }
 
