@@ -25,4 +25,13 @@ public class SubComplex {
     public List<Protein> getProteins() {
         return proteins;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for(Protein protein : proteins){
+            builder.append(protein.toString()).append("\t");
+        }
+        return builder.toString();
+    }
 }

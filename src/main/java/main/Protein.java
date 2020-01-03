@@ -20,4 +20,9 @@ public class Protein {
         Protein test = (Protein) obj;
         return this.value == test.value;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(value);
+    }
 }
