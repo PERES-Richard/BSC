@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 public class ComplexGenerator {
+    private static final int NB_SOMMETS = 100;
+    private Random r;
 
-    public static final int NB_SOMMETS = 100;
-    public Random r;
-
-    public ComplexGenerator(int seed) {
+    ComplexGenerator(int seed) {
         this.r = new Random(seed);
     }
 
@@ -24,7 +23,7 @@ public class ComplexGenerator {
      * @param t Nombre de sous-complexes
      * @return Le complexe généré
      */
-    public Complexe generate(int p, int t) throws Exception {
+    Complexe generate(int p, int t) throws Exception {
         List<SubComplex> subComplexes = new ArrayList<>();
         List<Protein> proteinList = generateProtein();
 
