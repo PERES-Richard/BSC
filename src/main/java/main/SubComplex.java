@@ -6,20 +6,22 @@ import java.util.List;
 public class SubComplex {
     private List<Protein> proteins;
 
-    public SubComplex(List<Protein> proteins) {
-        this.proteins = proteins;
-    }
-
     public SubComplex(){
         this.proteins = new ArrayList<>();
     }
 
     public void addProtein(Protein protein) throws Exception{
+        if(isContainsProtein(protein))
+            throw new Exception("Protein "+protein.getValue()+" is already in sub complex");
+        proteins.add(protein);
+    }
+
+    public boolean isContainsProtein(Protein protein){
         for(Protein protein1 : proteins){
             if(protein1.equals(protein))
-                throw new Exception("Protein "+protein.getValue()+" is already in sub complex");
+                return true;
         }
-        proteins.add(protein);
+        return false;
     }
 
     public List<Protein> getProteins() {
