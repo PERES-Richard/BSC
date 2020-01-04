@@ -18,7 +18,11 @@ class Graph {
         initial = c;
     }
 
-    void algo1() {
+    List<Edge> getEdges() {
+        return edges;
+    }
+
+    void algo1(boolean verbose) {
         int[] occurences = new int[101]; // initialized at 0 by default, on compte le nombre d'occurence d'une protéine pour détermine si elle est multiple ou unique
         for (SubComplex s : initial.getSubComplexes()) {
             for (Protein p : s.getProteins()) {
@@ -34,9 +38,7 @@ class Graph {
         }
 
         for (int i = 1; i < occurences.length; i++) { //On repère les uniques et multiples d'un assemblage
-            if (occurences[i] != 0) {
-                System.out.println("Occurences de " + i + " : " + occurences[i]);
-            }
+            if (verbose && occurences[i] != 0) System.out.println("Occurences de " + i + " : " + occurences[i]);
             if (occurences[i] == 1) {
                 uniques.get(initial.getConcernedSubComplexes(i).get(0)).add(initial.getConcernedSubComplexes(i).get(0).getProtein(i));
             } else if (occurences[i] > 1) {
@@ -45,33 +47,37 @@ class Graph {
                 }
             }
         }
-        System.out.print("\n");
+        if(verbose) System.out.print("\n");
 
-        for (Map.Entry<SubComplex, List<Protein>> entry : uniques.entrySet()) { //Affichage only
-            if (entry.getValue().size() != 0) {
-                System.out.print("Protéines uniques dans le sous complexe [" + entry.getKey() + "] : ");
-                for (Protein p : entry.getValue()) {
-                    System.out.print(p + "\t");
+        if(verbose) {
+            for (Map.Entry<SubComplex, List<Protein>> entry : uniques.entrySet()) { //Affichage only
+                if (entry.getValue().size() != 0) {
+                    System.out.print("Protéines uniques dans le sous complexe [" + entry.getKey() + "] : ");
+                    for (Protein p : entry.getValue()) {
+                        System.out.print(p + "\t");
+                    }
+                    System.out.print("\n");
+                } else {
+                    System.out.println("Pas de protéine unique dans le sous complexe [" + entry.getKey() + "]");
                 }
-                System.out.print("\n");
-            } else {
-                System.out.println("Pas de protéine unique dans le sous complexe [" + entry.getKey() + "]");
             }
+            System.out.print("\n");
         }
-        System.out.print("\n");
 
-        for (Map.Entry<SubComplex, List<Protein>> entry : multiples.entrySet()) { //Affichage only
-            if (entry.getValue().size() != 0) {
-                System.out.print("Protéines multiples dans le sous complexe [" + entry.getKey() + "] : ");
-                for (Protein p : entry.getValue()) {
-                    System.out.print(p + "\t");
+        if(verbose) {
+            for (Map.Entry<SubComplex, List<Protein>> entry : multiples.entrySet()) { //Affichage only
+                if (entry.getValue().size() != 0) {
+                    System.out.print("Protéines multiples dans le sous complexe [" + entry.getKey() + "] : ");
+                    for (Protein p : entry.getValue()) {
+                        System.out.print(p + "\t");
+                    }
+                    System.out.print("\n");
+                } else {
+                    System.out.println("Pas de protéine multiple dans le sous complexe [" + entry.getKey() + "]");
                 }
-                System.out.print("\n");
-            } else {
-                System.out.println("Pas de protéine multiple dans le sous complexe [" + entry.getKey() + "]");
             }
+            System.out.print("\n");
         }
-        System.out.print("\n");
 
         for (SubComplex s : initial.getSubComplexes()) { //On lie les prots uniques entre elles, et les prots multiples entre elles
             for (int i = 0; i < uniques.get(s).size() - 1; i++) {
@@ -114,12 +120,12 @@ class Graph {
 
     void printGraph() {
         for (Edge e : edges) {
-            System.out.print(e);
+             System.out.print(e);
         }
     }
 
     void printNumberEdges() {
-        System.out.println("Le nombre d'arêtes est " + edges.size());
+         System.out.println("Le nombre d'arêtes est " + edges.size());
     }
 
     public void image(String file) {
@@ -137,5 +143,16 @@ class Graph {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getDelta() {
+        List<Integer> degres = new ArrayList<>();
+        for (SubComplex subComplex : initial.getSubComplexes()) {
+            for(Protein p : subComplex.getProteins())
+                degres.add(p.getDegre());
+        }
+        Collections.sort(degres);
+
+        return degres.get(degres.size()-1);
     }
 }
