@@ -110,7 +110,6 @@ class Graph {
                 edges.add(e);
             }
         }
-
     }
 
     void printGraph() {
@@ -127,8 +126,9 @@ class Graph {
         try {
             StringBuilder builder = new StringBuilder();
             builder.append("graph {");
+
             for (Edge e : edges) {
-                builder.append(e.toDot());
+                builder.append(e.toDot());//+ "[color=blue]");
             }
             builder.append("}");
 
