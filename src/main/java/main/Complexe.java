@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Complexe {
-    private List<SubComplex> subComplexes;
+    public List<SubComplex> subComplexes;
 
     Complexe(List<SubComplex> subComplexes) {
         this.subComplexes = subComplexes;
-    }
-
-    public List<SubComplex> getSubComplexes() {
-        return subComplexes;
     }
 
     public List<SubComplex> getConcernedSubComplexes(int v){
