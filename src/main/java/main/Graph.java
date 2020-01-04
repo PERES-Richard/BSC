@@ -1,5 +1,12 @@
 package main;
 
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
+import guru.nidi.graphviz.model.MutableGraph;
+import guru.nidi.graphviz.parse.Parser;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 class Graph {
@@ -105,4 +112,19 @@ class Graph {
         System.out.println("Le nombre d'arêtes est "+edges.size());
     }
 
+    public void image(String file) {
+        try {
+            StringBuilder builder = new StringBuilder();
+            builder.append("graph {");
+            for(Edge e : edges){
+                builder.append(e.toDot());
+            }
+            builder.append("}");
+
+            MutableGraph g = new Parser().read( builder.toString());
+            Graphviz.fromGraph(g).width(900).render(Format.PNG).toFile(new File("example/" + file + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

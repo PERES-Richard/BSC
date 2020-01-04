@@ -25,4 +25,8 @@ public class Edge {
     public String toString() {
         return begin.toString()  + " lié à " + end.toString() + "\n";
     }
+
+    public String toDot() {
+        return begin.toString()  + " -- " + end.toString() + "\n";
+    }
 }
