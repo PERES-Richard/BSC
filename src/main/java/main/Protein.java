@@ -2,6 +2,7 @@ package main;
 
 public class Protein implements Comparable<Protein>{
     private int value;
+    public int degre;
 
     @Override
     public int compareTo(Protein candidate) {
@@ -10,6 +11,7 @@ public class Protein implements Comparable<Protein>{
 
     public Protein(int value) {
         this.value = value;
+        degre = 0;
     }
 
     public int getValue() {

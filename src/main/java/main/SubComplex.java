@@ -26,6 +26,14 @@ public class SubComplex {
         return false;
     }
 
+    Protein getProtein(int value){
+        for(Protein p : proteins){
+            if(p.getValue() == value)
+                return p;
+        }
+        return null;
+    }
+
     public List<Protein> getProteins() {
         return proteins;
     }

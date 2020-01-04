@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Complexe {
@@ -11,6 +12,16 @@ public class Complexe {
 
     public List<SubComplex> getSubComplexes() {
         return subComplexes;
+    }
+
+    public List<SubComplex> getConcernedSubComplexes(int v){
+        List<SubComplex> concerned = new ArrayList<>();
+        for(SubComplex s  : subComplexes){
+            if(s.isContainsProtein(new Protein(v))){
+                concerned.add(s);
+            }
+        }
+        return  concerned;
     }
 
     @Override
