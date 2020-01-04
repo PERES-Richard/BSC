@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.*;
 
 class Graph {
-    private List<Edge> edges;
-    private Complexe initial;
+    public List<Edge> edges;
+    public Complexe initial;
 
     Graph(Complexe c) {
         edges = new ArrayList<>();
