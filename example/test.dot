@@ -1,0 +1,4 @@
+graph {
+    white -- cyan
+    white -- yellow
+}
