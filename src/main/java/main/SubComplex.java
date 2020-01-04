@@ -7,6 +7,18 @@ import java.util.List;
 public class SubComplex {
     private List<Protein> proteins;
 
+    SubComplex cloneObject(){
+        List<Protein> proteins = new ArrayList<>();
+        for(Protein protein : this.proteins){
+            proteins.add(protein.cloneObject());
+        }
+        return new SubComplex(proteins);
+    }
+
+    private SubComplex(List<Protein> proteins){
+        this.proteins = proteins;
+    }
+
     SubComplex(){
         this.proteins = new ArrayList<>();
     }
@@ -34,7 +46,7 @@ public class SubComplex {
         return null;
     }
 
-    public List<Protein> getProteins() {
+    List<Protein> getProteins() {
         return proteins;
     }
 

@@ -20,7 +20,7 @@ class Graph {
 
     void algo1() {
         int[] occurences = new int[101]; // initialized at 0 by default, on compte le nombre d'occurence d'une protéine pour détermine si elle est multiple ou unique
-        for (SubComplex s : initial.subComplexes) {
+        for (SubComplex s : initial.getSubComplexes()) {
             for (Protein p : s.getProteins()) {
                 occurences[p.getValue()] += 1;
             }
@@ -28,7 +28,7 @@ class Graph {
 
         Map<SubComplex, List<Protein>> uniques = new HashMap<>();
         Map<SubComplex, List<Protein>> multiples = new HashMap<>();
-        for (SubComplex s : initial.subComplexes) {
+        for (SubComplex s : initial.getSubComplexes()) {
             uniques.put(s, new ArrayList<>());
             multiples.put(s, new ArrayList<>());
         }
@@ -73,7 +73,7 @@ class Graph {
         }
         System.out.print("\n");
 
-        for (SubComplex s : initial.subComplexes) { //On lie les prots uniques entre elles, et les prots multiples entre elles
+        for (SubComplex s : initial.getSubComplexes()) { //On lie les prots uniques entre elles, et les prots multiples entre elles
             for (int i = 0; i < uniques.get(s).size() - 1; i++) {
                 Edge un = new Edge(uniques.get(s).get(i), uniques.get(s).get(i + 1));
                 un.incrementDegre();
@@ -89,10 +89,10 @@ class Graph {
             }
         }
 
-        for (SubComplex s : initial.subComplexes) { //On lie les protéines uniques aux protéines multiple d'un assemblage
+        for (SubComplex s : initial.getSubComplexes()) { //On lie les protéines uniques aux protéines multiple d'un assemblage
             if (uniques.get(s).size() > 0 && multiples.get(s).size() > 0) {
                 // On utilise un comparator pour trouver les sommets avec le plus petit degrés pour faire le lien
-                Comparator<Protein> compareDegree = Comparator.comparingInt(o -> o.degre);
+                Comparator<Protein> compareDegree = Comparator.comparingInt(Protein::getDegre);
                 Edge unmul = new Edge(Collections.min(uniques.get(s), compareDegree), Collections.min(multiples.get(s), compareDegree));
                 if (!edges.contains(unmul)) {
                     unmul.incrementDegre();
@@ -103,7 +103,7 @@ class Graph {
     }
 
     void algo2() {
-        for (SubComplex subComplex : initial.subComplexes) {
+        for (SubComplex subComplex : initial.getSubComplexes()) {
             for (int i = 0; i < subComplex.getProteins().size() - 1; i++) {
                 Edge e = new Edge(subComplex.getProteins().get(i), subComplex.getProteins().get(i + 1));
                 e.incrementDegre();
