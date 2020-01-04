@@ -2,20 +2,32 @@ package main;
 
 public class Protein implements Comparable<Protein>{
     private int value;
-    public int degre;
+    private int degre;
+
+    Protein cloneObject() {
+        return new Protein(value);
+    }
 
     @Override
     public int compareTo(Protein candidate) {
         return Integer.compare(this.getValue(), candidate.getValue());
     }
 
-    public Protein(int value) {
+    Protein(int value) {
         this.value = value;
         degre = 0;
     }
 
-    public int getValue() {
+    void incrementDegree(){
+        degre++;
+    }
+
+    int getValue() {
         return value;
+    }
+
+    int getDegre() {
+        return degre;
     }
 
     @Override

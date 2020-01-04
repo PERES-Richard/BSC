@@ -8,35 +8,15 @@ public class Main {
     public final static int NB_ESSAIES = 10000;
 
     public static void main(String[] args) throws Exception {
-        /*
-
-        ComplexGenerator generator = new ComplexGenerator(21);
-        Complexe complexe = generator.generate(10, 20);
-        System.out.println(complexe);
-        Graph g = new Graph(complexe);
-        g.algo1();
-//        g.printGraph();
-//        g.printNumberEdges();
-        g.image("algo1");
-
-
-        Graph g2 = new Graph(new ComplexGenerator(21).generate(10, 20));
-        g2.algo2();
-//        g2.printGraph();
-//        g2.printNumberEdges();
-        g2.image("algo2");
-
-        */
-
         List<Integer> kList = new ArrayList<>();
         List<Integer> dList = new ArrayList<>();
         essaies = new HashMap<>();
 
         for (int i = 0; i < NB_ESSAIES; i++) {
             Graph gi = new Graph(new ComplexGenerator().generate(10, 20));
-            gi.algo1();
-//            gi.printNumberEdges();
-            kList.add(gi.edges.size());
+            gi.algo1(false);
+            gi.printNumberEdges();
+            kList.add(gi.getEdges().size());
             dList.add(gi.getDelta());
             essaies.put(gi.edges.size(), gi.getDelta());
         }

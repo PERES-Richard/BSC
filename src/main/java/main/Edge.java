@@ -1,18 +1,25 @@
 package main;
 
 public class Edge {
-    public Protein begin;
-    public Protein end;
+    private Protein begin;
+    private Protein end;
 
-    public Edge(Protein b, Protein e){
+    Edge(Protein b, Protein e){
         begin = b;
         end = e;
-
     }
 
-    public void incrementDegre(){
-        begin.degre +=1;
-        end.degre +=1;
+    public Protein getBegin() {
+        return begin;
+    }
+
+    public Protein getEnd() {
+        return end;
+    }
+
+    void incrementDegre(){
+        begin.incrementDegree();
+        end.incrementDegree();
     }
 
     @Override
@@ -26,7 +33,7 @@ public class Edge {
         return begin.toString()  + " lié à " + end.toString() + "\n";
     }
 
-    public String toDot() {
+    String toDot() {
         return begin.toString()  + " -- " + end.toString() + "\n";
     }
 }

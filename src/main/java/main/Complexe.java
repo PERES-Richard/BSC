@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Complexe {
-    public List<SubComplex> subComplexes;
+    private List<SubComplex> subComplexes;
+
+    Complexe cloneObject() {
+        List<SubComplex> subComplexes = new ArrayList<>();
+        for(SubComplex subComplex : this.subComplexes)
+            subComplexes.add(subComplex.cloneObject());
+        return new Complexe(subComplexes);
+    }
 
     Complexe(List<SubComplex> subComplexes) {
         this.subComplexes = subComplexes;
     }
 
-    public List<SubComplex> getConcernedSubComplexes(int v){
+    List<SubComplex> getConcernedSubComplexes(int v){
         List<SubComplex> concerned = new ArrayList<>();
         for(SubComplex s  : subComplexes){
             if(s.isContainsProtein(new Protein(v))){
@@ -18,6 +25,10 @@ public class Complexe {
             }
         }
         return  concerned;
+    }
+
+    List<SubComplex> getSubComplexes() {
+        return subComplexes;
     }
 
     @Override
