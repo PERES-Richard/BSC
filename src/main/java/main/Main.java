@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
 
     public static Map<Integer, Integer> essaies;
-    public final static int NB_ESSAIES = 10000;
+    public final static int NB_ESSAIES = 1000;
 
     public static void main(String[] args) throws Exception {
         List<Integer> kList = new ArrayList<>();
@@ -14,7 +14,7 @@ public class Main {
 
         for (int i = 0; i < NB_ESSAIES; i++) {
             Graph gi = new Graph(new ComplexGenerator().generate(10, 20));
-            gi.algo1(false);
+            gi.algo1alt(false);
             gi.printNumberEdges();
             kList.add(gi.getEdges().size());
             dList.add(gi.getDelta());
