@@ -52,7 +52,7 @@ public class Main {
          *  puis nous regardons parmis toutes les solutions obtenues à partir des N générations aléatoires
          *  combien on un K et un Delta inférieur ou égal à la valeur du tableau f(K, D)
          */
-//        Facade.printTableaux(5000, 150, 350, 7, 16, 1);
+        //Facade.printTableaux(5000, 150, 350, 7, 16, 1);
 
 
         // Idem au-dessus
