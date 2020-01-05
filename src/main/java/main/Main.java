@@ -29,7 +29,7 @@ public class Main {
          * Seed obligatoire (car pas pertinent sans seed) mais possibilité de passer 'new Random().nextInt()" au lieu de 1665
          * Si Visualisation est True, l'URI de celle-ci est affichée dans le terminal
          */
-//         Graph graph = Facade.singleGraphe(3, 4, 1, 1665, true);
+          // Graph graph = Facade.singleGraphe(3, 4, 1, 1665, true);
 
 
         /**
