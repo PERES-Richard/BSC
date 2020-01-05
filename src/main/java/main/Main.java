@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main {
 
-    private static Map<Integer, Integer> essaies;
+    private static Map<Integer, Integer[]> essaies;
     private final static int NB_ESSAIES = 1000;
     private final static int K_MIN = 100;
     private final static int DELTA_MIN = 6;
@@ -20,7 +20,7 @@ public class Main {
             gi.printNumberEdges();
             kList.add(gi.getEdges().size());
             dList.add(gi.getDelta());
-            essaies.put(gi.edges.size(), gi.getDelta());
+            essaies.put(i, new Integer[]{gi.edges.size(),gi.getDelta()});
         }
 
         Collections.sort(kList);
@@ -51,8 +51,8 @@ public class Main {
 
     private static int stats(int k, int d) {
         int nb = 0;
-        for (Map.Entry<Integer, Integer> set : essaies.entrySet()) {
-            if (set.getKey() <= k && set.getValue() <= d)
+        for (Map.Entry<Integer, Integer[]> set : essaies.entrySet()) {
+            if (set.getValue()[0] <= k && set.getValue()[1] <= d)
                 nb++;
         }
         return (int)((float) nb*100 / NB_ESSAIES);
