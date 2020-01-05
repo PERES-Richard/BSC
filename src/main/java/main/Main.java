@@ -4,8 +4,10 @@ import java.util.*;
 
 public class Main {
 
-    public static Map<Integer, Integer> essaies;
-    public final static int NB_ESSAIES = 1000;
+    private static Map<Integer, Integer> essaies;
+    private final static int NB_ESSAIES = 1000;
+    private final static int K_MIN = 100;
+    private final static int DELTA_MIN = 6;
 
     public static void main(String[] args) throws Exception {
         List<Integer> kList = new ArrayList<>();
@@ -31,14 +33,15 @@ public class Main {
         System.out.println("delta max = " + dList.get(dList.size() - 1) + "\n");
 
 
-        for (int k = 155; k < 185; k += 5)
+        System.out.print("\t");
+        for (int k = K_MIN; k <= K_MIN+100; k += 10)
             System.out.print(String.format("%d\t", k));
         System.out.println();
 
-        for (int d = 8; d < 18; d += 2) {
+        for (int d = DELTA_MIN; d < DELTA_MIN+10; d += 1) {
             System.out.print(String.format("%d\t", d));
 
-            for (int k = 150; k < 180; k += 5) {
+            for (int k = K_MIN; k <= K_MIN+100; k += 10) {
                 System.out.print(String.format("%d\t", stats(k, d)));
             }
             System.out.println();

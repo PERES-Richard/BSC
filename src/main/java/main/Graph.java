@@ -182,6 +182,17 @@ class Graph {
             }
         }
 
+        for(SubComplex s : initial.getSubComplexes()){
+            for (int i = 0; i < multiples.get(s).size() - 1; i++) {
+                Edge mul = new Edge(multiples.get(s).get(i), multiples.get(s).get(i + 1));
+                List<Edge> tmp = new ArrayList<>(edges);
+                if (!edges.contains(mul) && !hamiltonian(mul.getBegin(), mul.getEnd(), multiples.get(s), tmp)) {
+                    mul.incrementDegre();
+                    edges.add(mul);
+                }
+            }
+        }
+
         for (SubComplex s : initial.getSubComplexes()) { //On lie les protéines uniques aux protéines multiple d'un assemblage
             if (uniques.get(s).size() > 0 && multiples.get(s).size() > 0) {
                 // On utilise un comparator pour trouver les sommets avec le plus petit degrés pour faire le lien
@@ -198,10 +209,7 @@ class Graph {
     boolean hamiltonian(Protein start, Protein end, List<Protein> protAssemblage, List<Edge> theEdges){
         for(Edge g : theEdges){
             if(protAssemblage.contains(g.getBegin()) && protAssemblage.contains(g.getEnd())){
-                if(g.getBegin().equals(start) && g.getEnd().equals(end)){
-                    return true;
-                }
-                else if(g.getBegin().equals(start)){
+                if(g.getBegin().equals(start)){
                     if(g.getEnd().equals(end)){
                         return true;
                     }else {
