@@ -1,76 +1,71 @@
 package main;
 
-import java.util.*;
+import java.util.List;
 
 public class Main {
 
-    private static Map<Integer, Integer[]> essaies;
-    private final static int NB_ESSAIES = 5000;
-    private final static int K_MIN = 150;
-    private final static int DELTA_MIN = 7;
-
     public static void main(String[] args) throws Exception {
 
-        int[][] listTP = {
-                {20, 10},
-                {20, 15},
-                {20, 20},
-                {30, 10},
-                {30, 15},
-                {30, 20},
-        };
+        /*
+        L'utilisation du programme via l'objet Facade, permet de :
+            - Créer un graphe à partir d'un complexe généré via seed
+            - Afficher les tableaux des question 8 et 9 en variant les bornes et le nombre d'essaies
 
-        for (int e = 0; e < listTP.length; e++) {
+         Dans tous les cas, il est possible d'obtenir depuis le Graph :
+            - Une image de visualisation (fonction image(String filename) de Graph)
+            - Obtenir le nombre d'arêtes k (fonction getK())
+            - Obtenir le delta minimum du graphe (fonction getDelta())
+            - Manipuler les Edges (via le getEdges())
+            - Manipuler le Complexe (et ses sous complexes) via l'attribut 'initial' du graphe
+         */
 
-            System.out.println(String.format("\n\nPour t=%d et p=%d", listTP[e][0], listTP[e][1]));
+        ////// Exemples d'actions possibles ////////
 
-            List<Integer> kList = new ArrayList<>();
-            List<Integer> dList = new ArrayList<>();
-            essaies = new HashMap<>();
-
-            for (int i = 0; i < NB_ESSAIES; i++) {
-                Graph gi = new Graph(new ComplexGenerator().generate(listTP[e][0], listTP[e][1]));
-//                gi.algo1alt(false);
-                gi.algo2();
-//            gi.printNumberEdges();
-                kList.add(gi.getEdges().size());
-                dList.add(gi.getDelta());
-                essaies.put(i, new Integer[]{gi.edges.size(), gi.getDelta()});
-            }
-
-            Collections.sort(kList);
-            Collections.sort(dList);
-
-            System.out.println("k min = " + kList.get(0));
-            System.out.println("k max = " + kList.get(kList.size() - 1));
-
-            System.out.println("delta min = " + dList.get(0));
-            System.out.println("delta max = " + dList.get(dList.size() - 1) + "\n");
+        /**
+         * Créer un graphe (avec un complexe généré via la seed 1665 pour p=3 et t=4) en utilisant l'algorithme 1
+         * si la visualisation est activé, une image est crée permettant de voir le graphe créé
+         *
+         * Algo peut etre 1 ou 2 (pour 1 ici)
+         * Seed obligatoire (car pas pertinent sans seed) mais possibilité de passer 'new Random().nextInt()" au lieu de 1665
+         * Si Visualisation est True, l'URI de celle-ci est affichée dans le terminal
+         */
+//         Graph graph = Facade.singleGraphe(3, 4, 1, 1665, true);
 
 
-            System.out.print("\t");
-            for (int k = K_MIN; k <= K_MIN + 200; k += 10)
-                System.out.print(String.format("%d\t", k));
-            System.out.println();
+        /**
+         * Affiche les 6 tableaux des questions 8 et 9
+         *
+         * En prenant en compte :
+         *  - Nombre de générations/essaies : 5 000
+         *
+         *  - Borne K min = 150
+         *  - Borne K max = 350 (de 10 en 10)
+         *
+         *  - Borne Delta min = 7
+         *  - Borne Delta max = 16 (de 1 en 1)
+         *
+         *  - Graphe construit via l'algorithme = 1
+         *
+         *  (ces paramètres sont ceux employés pour les données dans le rapport)
+         *
+         *  Nous construisons la solution la plus optimal (de l'algorithme) pour 1 problème donné
+         *  puis nous regardons parmis toutes les solutions obtenues à partir des N générations aléatoires
+         *  combien on un K et un Delta inférieur ou égal à la valeur du tableau f(K, D)
+         */
+//        Facade.printTableaux(5000, 150, 350, 7, 16, 1);
 
-            for (int d = DELTA_MIN; d < DELTA_MIN + 10; d += 1) {
-                System.out.print(String.format("%d\t", d));
 
-                for (int k = K_MIN; k <= K_MIN + 200; k += 10) {
-                    System.out.print(String.format("%d\t", stats(k, d)));
-                }
-                System.out.println();
-            }
-        }
+        // Idem au-dessus
+        // Graph graph = Facade.singleGraphe(3, 4, 1, 1665, false);
 
+        // Affiche toutes les Edges du Graph dans le terminal
+        // graph.printGraph();
+
+        // Récupère le complexe du graphe
+        // Complexe complexe = graph.initial;
+
+        // Récupère toutes les arêtes du graphe
+        // List<Edge> edges = graph.edges;
     }
 
-    private static int stats(int k, int d) {
-        int nb = 0;
-        for (Map.Entry<Integer, Integer[]> set : essaies.entrySet()) {
-            if (set.getValue()[0] <= k && set.getValue()[1] <= d)
-                nb++;
-        }
-        return (int) ((float) nb * 100 / NB_ESSAIES);
-    }
 }

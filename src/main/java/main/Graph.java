@@ -251,7 +251,7 @@ class Graph {
          System.out.println("Le nombre d'arêtes est " + edges.size());
     }
 
-    public void image(String file) {
+    public String image(String file) {
         try {
             StringBuilder builder = new StringBuilder();
             builder.append("graph {");
@@ -262,10 +262,13 @@ class Graph {
             builder.append("}");
 
             MutableGraph g = new Parser().read(builder.toString());
-            Graphviz.fromGraph(g).width(900).render(Format.PNG).toFile(new File("example/" + file + ".png"));
+            File f = new File("example/" + file + ".png");
+            Graphviz.fromGraph(g).width(900).render(Format.PNG).toFile(f);
+            return f.toURI().toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public int getDelta() {
@@ -277,5 +280,9 @@ class Graph {
         Collections.sort(degres);
 
         return degres.get(degres.size()-1);
+    }
+
+    public Integer getK() {
+        return getEdges().size();
     }
 }
